@@ -12,7 +12,7 @@ do_build() {
   fi
 
   echo "--- Copying files to cache ---"
-  for target in index.js package.json package-lock.json src public node_modules; do
+  for target in index.js package.json package-lock.json src public; do
     cp -r $target $CACHE_PATH/
   done
 
