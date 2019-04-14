@@ -1,0 +1,10 @@
+exec 2>&1
+
+echo "Starting Node App"
+
+export PORT={{cfg.app.port}}
+export NODE_BIN_PATH={{pkgPathFor "core/node"}}/bin
+
+echo "Executing ${NODE_BIN_PATH}/node index.js here:"
+
+$NODE_BIN_PATH/node index.js

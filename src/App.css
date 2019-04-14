@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  font-size: 12px;
+}
+
+.NoMembers {
+  padding-top: 2em;
+  font-size:2em;
+}
+.Node {
+  border-radius: 6px;
+  background: #73AD21;
+  padding: 10px; 
+  width: 180px;
+  height: 150px; 
+  font-size: 1em;
+  line-height: .6em;
+  display: inline-block;
+  margin: 1em 1em;
+}
+.Node .ip {
+  font-size: 1.5em;
+}
+.Node .status {
+
+}
+.Node .classGroup {
+
+}
+.Node .version {
+  font-size: .7em;
+  overflow: hidden;
+}
+
+.App-header {
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.error-icon {
+  position: absolute; top:5px; left:5px; color:#aaa; font-size:40px
+}
+
+.error-state {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
