@@ -8,6 +8,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   font-size: 12px;
+  padding-bottom:1em;
 }
 
 .NoMembers {
@@ -16,7 +17,7 @@
 }
 .Node {
   border-radius: 6px;
-  background: #73AD21;
+  background: #598818;
   padding: 10px; 
   width: 180px;
   height: 150px; 
@@ -25,6 +26,16 @@
   display: inline-block;
   margin: 1em 1em;
 }
+
+.blue { background:#2169ad; }
+.blue-updating { background:#21a7d4; }
+
+.green { background:#598818; }
+.green-updating { background:#7dc31b; }
+
+.red { background:#ad5821; }
+.red-updating { background:#ea3720; }
+
 .Node .ip {
   font-size: 1.5em;
 }
@@ -53,4 +64,18 @@
 .error-state {
   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
+}
+
+.rawjson {
+  width:80%;
+  padding:1em;
+  background-color: #383c44;
+  border:1px solid #111;
+  margin: auto;
+  text-align: left;
+  margin-top:1em;
+}
+
+.rawjson pre {
+  overflow: hidden;
 }

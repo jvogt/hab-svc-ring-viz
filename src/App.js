@@ -5,15 +5,24 @@ class App extends Component {
   // initialize our state 
   state = {
     nodes: [],
+    rawJson: {},
     intervalIsSet: false,
     showErrorIcon: false,
     showErrorState: false,
     showNoMembers: false,
-    showJSON: false
+    showJSON: false,
+    showRawJson: false,
+    testMode: false,
+    testIndex: 0,
+    testMax: 1
   };
 
   _handleKeyDown = (event) => {
-    if(event.keyCode === 74 ) { this.setState({showJSON: !this.state.showJSON })}
+    if(event.keyCode === 74 ) { this.setState({showJSON: !this.state.showJSON })} //j
+    if(event.keyCode === 82 ) { this.setState({showRawJson: !this.state.showRawJson })} //r
+    if(event.keyCode === 84 ) { this.setState({testMode: !this.state.testMode })} //t
+    if(event.keyCode === 190 ) { this.advanceTestMode() } //.
+    if(event.keyCode === 188 ) { this.rewindTestMode() } //,
   }
   // when component mounts, first thing it does is fetch all existing data in our db
   // then we incorporate a polling logic so that we can easily see if our db has 
@@ -37,8 +46,21 @@ class App extends Component {
     document.removeEventListener("keydown", this._handleKeyDown);
   }
 
+  advanceTestMode = () => {
+    if(this.state.testIndex < this.state.testMax) {this.setState({testIndex: this.state.testIndex + 1})}
+  }
+
+  rewindTestMode = () => {
+    if(this.state.testIndex > 0) {this.setState({testIndex: this.state.testIndex - 1})}
+  }
+
+  getTestJsonFilename = () => {
+    return "test/test-" + ('00' + this.state.testIndex).slice(-2) + ".json"
+  }
+
   getCensus = () => {
-    fetch("/census")
+    var uri = this.state.testMode ? this.getTestJsonFilename() : '/census'
+    fetch(uri)
       .then(error => this.handleHttpErrors(error))
       .then(data => data.json())
       .then(data => this.formatCensus(data))
@@ -79,9 +101,15 @@ class App extends Component {
   }
 
   formatCensus = (data) => {
+
+    this.setState({ rawJson: data })
+    var colors = ['blue','green','red']
+    var cidx = 0
     data = Object.keys(data.census_groups).map(cg => {
       var nodes = this.formatNodes(data.census_groups[cg].population)
       nodes.map(n => n.class_group = cg)
+      nodes.map(n => n.color = colors[cidx])
+      cidx = cidx > colors.length ? 0 : cidx + 1
       return {name: cg, nodes: nodes}
     });
     var nodes = []
@@ -106,6 +134,7 @@ class App extends Component {
       ip={node.ip}
       status={node.status}
       class_group={node.class_group}
+      color={node.color}
       version={node.package}
     />))
   }
@@ -121,6 +150,7 @@ class App extends Component {
         { this.renderNodes(this.state.nodes) }
         <br/>
         { this.state.showJSON ? <RawJSON json={this.state.nodes}/> : null }
+        { this.state.showRawJson ? <RawJSON json={this.state.rawJson}/> : null }
       </div>
     );
   }
@@ -128,8 +158,9 @@ class App extends Component {
 
 class Node extends Component {
   render() {
+    let className = 'Node ' + this.props.color
     return (
-      <div className="Node">
+      <div className={className}>
         <p className="ip">{this.props.ip}</p>
         <p className="classGroup">{this.props.class_group}</p>
         <p className="status">{this.props.status}</p>
@@ -160,9 +191,11 @@ class NoMembers extends Component {
 class RawJSON extends Component {
   render() {
     return (
-      <code>
-        {JSON.stringify(this.props.json, null, 2)}
-      </code>
+      <div className="rawjson">
+        <pre>
+          {JSON.stringify(this.props.json, null, 2)}
+        </pre>
+      </div>
       )
   }
 }
