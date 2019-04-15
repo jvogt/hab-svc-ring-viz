@@ -14,6 +14,13 @@ proxy.on('error', function (err, req, res) {
   res.end('Something went wrong');
 });
 
+proxy.on('proxyRes', function(proxyRes, req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+});
+
 http.createServer(function(req, res) {
   if(req.url.match(/^\/census/g)) {
     proxy.web(req, res, { target: 'http://localhost:9631', proxyTimeout: 1000, timeout: 1000 });
