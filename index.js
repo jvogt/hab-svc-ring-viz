@@ -15,7 +15,7 @@ proxy.on('error', function (err, req, res) {
 });
 
 proxy.on('proxyRes', function(proxyRes, req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', true);
