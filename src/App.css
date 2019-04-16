@@ -8,12 +8,54 @@
   font-size: calc(10px + 2vmin);
   color: white;
   font-size: 12px;
+  padding-top:1em;
   padding-bottom:1em;
+  padding-right:3.5em;
 }
 
 .NoMembers {
   padding-top: 2em;
   font-size:2em;
+}
+
+.Host {
+  border-radius: 4px;
+  background: #333;
+  padding: 10px; 
+  width: 100%;
+  height: 55px; 
+  font-size: 1em;
+  line-height: .6em;
+  display: inline-block;
+  margin: 1em 0em 1em 1em;
+  text-align:left;
+}
+
+.Host .hostdetails {
+  text-align:center;
+  width:140px;
+  float:left;
+}
+
+.hostdetails p {
+  line-height: 1.5em;
+  margin: 0;
+}
+.Host .ip {
+  font-size:2em;
+}
+
+.Service {
+  display:block;
+  float:left;
+  min-width:220px;
+  border-radius:2px;
+  padding:3px;
+  margin-left:1em;
+}
+
+.Service .version {
+  font-size:.8em;
 }
 .Node {
   border-radius: 6px;
@@ -35,6 +77,12 @@
 
 .red { background:#ad5821; }
 .red-updating { background:#ea3720; }
+
+.purple { background:#881882; }
+.purple-updating { background:#c119b8; }
+
+.royalblue { background: #333780 }
+.royalblue-updating { background: #444ab5 }
 
 .Node .ip {
   font-size: 1.5em;
@@ -78,4 +126,13 @@
 
 .rawjson pre {
   overflow: hidden;
+}
+
+.ServerOverride {
+  position:absolute;
+  top:5px;
+  right:5px;
+}
+.ServerOverride input {
+  width:200px;
 }
