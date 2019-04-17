@@ -105,8 +105,11 @@
   color: #61dafb;
 }
 
+.error-icon-container {
+  position: absolute; height:100%;
+}
 .error-icon {
-  position: absolute; top:5px; left:5px; color:#aaa; font-size:40px
+  position: absolute; top:5px; left:5px; color:#aaa; font-size:40px;
 }
 
 .error-state {

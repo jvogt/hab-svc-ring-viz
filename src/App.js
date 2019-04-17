@@ -302,9 +302,9 @@ class Node extends Component {
 class ErrorIcon extends Component {
   render() {
     return (
-      <span className="error-icon">
-        ⚠
-      </span>
+       <span className="error-icon">
+          ⚠
+        </span>
     )
   }
 }
